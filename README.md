@@ -1,20 +1,21 @@
 # 项目概述
 
+<cite>
 **本文档引用的文件**
-- [sigma_x_seirv_simulation.m](chatgpt/sigma_x_seirv_simulation.m)
-- [报告.md](chatgpt/报告.md)
-- [结果.md](chatgpt/结果.md)
-- [sigmaX_model.m](deepseek/sigmaX_model.m)
-- [sigmaX_model_report.md](deepseek/sigmaX_model_report.md)
-- [结果.md](deepseek/结果.md)
-- [untitled2.m](doubao/untitled2.m)
-- [报告.md](doubao/报告.md)
-- [结果.md](doubao/结果.md)
-- [a.m](gemini/a.m)
-- [结果.md](gemini/结果.md)
+- [sigma_x_seirv_simulation.m](file://chatgpt/sigma_x_seirv_simulation.m)
+- [报告.md](file://chatgpt/报告.md)
+- [结果.md](file://chatgpt/结果.md)
+- [sigmaX_model.m](file://deepseek/sigmaX_model.m)
+- [sigmaX_model_report.md](file://deepseek/sigmaX_model_report.md)
+- [结果.md](file://deepseek/结果.md)
+- [untitled2.m](file://doubao/untitled2.m)
+- [报告.md](file://doubao/报告.md)
+- [结果.md](file://doubao/结果.md)
+- [a.m](file://gemini/a.m)
+- [结果.md](file://gemini/结果.md)
+</cite>
 
 ## 目录
-
 1. [引言](#引言)
 2. [项目结构](#项目结构)
 3. [核心组件](#核心组件)
@@ -27,235 +28,561 @@
 
 ## 引言
 
-本项目是一个基于 MATLAB 的传染病传播动力学仿真系统，专门针对 Sigma-X 病毒在千万级城市中的传播行为进行建模和仿真分析。项目采用了先进的 SEIRV（易感 - 潜伏 - 感染 - 康复 - 免疫）模型框架，集成了动态干预系统、疫苗延迟效应建模和免疫衰减机制，为公共卫生决策提供了科学的定量分析工具。
+本项目是一个基于MATLAB的传染病传播动力学仿真系统，专门针对Sigma-X病毒在千万级城市中的传播行为进行建模和仿真分析。项目采用了先进的SEIRV（易感-潜伏-感染-康复-免疫）模型框架，集成了动态干预系统、疫苗延迟效应建模和免疫衰减机制，为公共卫生决策提供了科学的定量分析工具。
 
-该仿真系统通过四个不同AI 助手版本的实现，展现了多种建模策略和技术方案，每个版本都有其独特的特点和优势。项目不仅为初学者提供了清晰的概念性概述，也为经验丰富的开发者提供了深入的技术细节和实现参考。
+该仿真系统通过四个不同AI助手版本的实现，展现了多种建模策略和技术方案，每个版本都有其独特的特点和优势。项目不仅为初学者提供了清晰的概念性概述，也为经验丰富的开发者提供了深入的技术细节和实现参考。
 
 ## 项目结构
 
-项目采用模块化的文件组织结构，每个 AI 助手版本都包含独立的主程序文件、详细的建模报告和结果分析文件。整体结构如下：
+项目采用模块化的文件组织结构，每个AI助手版本都包含独立的主程序文件、详细的建模报告和结果分析文件。整体结构如下：
 
+```mermaid
+graph TB
+subgraph "AI助手版本"
+A1[ChatGPT版本<br/>sigma_x_seirv_simulation.m]
+A2[DeepSeek版本<br/>sigmaX_model.m]
+A3[DouBao版本<br/>untitled2.m]
+A4[Google Gemini版本<br/>a.m]
+end
+subgraph "辅助文档"
+D1[ChatGPT报告<br/>报告.md]
+D2[DeepSeek报告<br/>sigmaX_model_report.md]
+D3[DouBao报告<br/>报告.md]
+D4[结果分析<br/>结果.md文件]
+end
+subgraph "仿真输出"
+O1[可视化图表]
+O2[数据统计]
+O3[峰值分析]
+end
+A1 --> D1
+A2 --> D2
+A3 --> D3
+A4 --> D4
+A1 --> O1
+A2 --> O2
+A3 --> O3
+A4 --> O1
+D1 --> O2
+D2 --> O3
+D3 --> O1
+D4 --> O2
 ```
-matlab/
-├── chatgpt/
-│   ├── sigma_x_seirv_simulation.m    # ChatGPT 版本主程序
-│   ├── 报告.md                        # 详细建模报告
-│   └── 结果.md                        # 仿真结果分析
-├── deepseek/
-│   ├── sigmaX_model.m                 # DeepSeek 版本主程序
-│   ├── sigmaX_model_report.md         # 详细建模报告
-│   └── 结果.md                        # 仿真结果分析
-├── doubao/
-│   ├── untitled2.m                    # 豆包版本主程序
-│   ├── 报告.md                        # 详细建模报告
-│   └── 结果.md                        # 仿真结果分析
-├── gemini/
-│   ├── a.m                            # Gemini 版本主程序
-│   ├── 报告.md                        # 详细建模报告
-│   └── 结果.md                        # 仿真结果分析
-├── 提示词.md                          # 统一的测评提示词
-└── README.md                          # 项目说明文件
-```
+
+**图表来源**
+- [sigma_x_seirv_simulation.m:1-154](file://chatgpt/sigma_x_seirv_simulation.m#L1-L154)
+- [sigmaX_model.m:1-244](file://deepseek/sigmaX_model.m#L1-L244)
+- [untitled2.m:1-140](file://doubao/untitled2.m#L1-L140)
+- [a.m:1-160](file://gemini/a.m#L1-L160)
+
+**章节来源**
+- [sigma_x_seirv_simulation.m:1-154](file://chatgpt/sigma_x_seirv_simulation.m#L1-L154)
+- [sigmaX_model.m:1-244](file://deepseek/sigmaX_model.m#L1-L244)
+- [untitled2.m:1-140](file://doubao/untitled2.m#L1-L140)
+- [a.m:1-160](file://gemini/a.m#L1-L160)
 
 ## 核心组件
 
-### SEIRV 模型架构
+### SEIRV模型架构
 
-项目的核心是改进的 SEIRV 模型，该模型扩展了传统的 SEIR 模型以适应 Sigma-X 病毒的特殊传播特性：
+项目的核心是改进的SEIRV模型，该模型扩展了传统的SEIR模型以适应Sigma-X病毒的特殊传播特性：
 
-- **S (Susceptible)**: 易感者，包括未接种和接种后未产生抗体的个体
-- **E1 (Exposed 1)**: 潜伏前期（前 4 天），无传染性
-- **E2 (Exposed 2)**: 潜伏后期（后 2 天），具有传染性（传染力为 I 的一半）
-- **I (Infected)**: 正式感染期（平均 8 天），具有强传染性
-- **R (Recovered)**: 康复者，具有暂时免疫力（150 天后可能衰减）
-- **V (Vaccinated)**: 疫苗免疫者，具有长期免疫力（85% 保护率，150 天后可能衰减）
+```mermaid
+flowchart LR
+subgraph "易感人群"
+S[易感者 S]
+Sv[接种后易感者 Sv]
+U[U1-U14 接种等待舱室]
+end
+subgraph "潜伏期"
+E1[潜伏前期 E1<br/>无传染性]
+E2[潜伏后期 E2<br/>有传染性]
+end
+subgraph "感染期"
+I[感染者 I<br/>有传染性]
+end
+subgraph "康复期"
+R[康复者 R<br/>暂时免疫]
+V[疫苗免疫者 V<br/>长期免疫]
+end
+S --> E1
+Sv --> E1
+U --> E1
+E1 --> E2
+E2 --> I
+I --> R
+R --> S
+S --> V
+R --> S
+V --> S
+E2 -.-> S
+I -.-> S
+```
+
+**图表来源**
+- [sigmaX_model.m:172-244](file://deepseek/sigmaX_model.m#L172-L244)
+- [a.m:84-134](file://gemini/a.m#L84-L134)
 
 ### 动态干预系统
 
 动态干预系统采用迟滞控制算法，通过监测活跃感染者比例来自动调整社会距离措施：
 
-- **正常状态**: P(t) ≤ 0.1%，接触系数 c = 1.0
-- **严格管控**: P(t) > 1%，接触系数 c = 0.25（降低 75%）
-- **政策松动**: 0.1% < P(t) < 1%，接触系数 c = 0.5（恢复至 50%）
+```mermaid
+stateDiagram-v2
+[*] --> 正常状态
+正常状态 : P(t) ≤ 0.1%
+正常状态 --> 严格管控 : P(t) > 1%
+正常状态 --> 政策松动 : P(t) > 0.1% 且 P(t) < 1%
+严格管控 : P(t) > 1%
+严格管控 --> 政策松动 : P(t) < 0.1%
+严格管控 --> 严格管控 : 继续高传播
+政策松动 : 0.1% < P(t) < 1%
+政策松动 --> 严格管控 : P(t) > 1%
+政策松动 --> 政策松动 : 继续低传播
+note right of 正常状态
+接触系数 c = 1.0
+传播率不变
+end note
+note right of 严格管控
+接触系数 c = 0.25
+传播率降低75%
+end note
+note right of 政策松动
+接触系数 c = 0.5
+传播率恢复至50%
+end note
+```
 
-迟滞效应确保政策不会频繁切换，只有当感染者比例跨越阈值时才会触发状态变更。
+**图表来源**
+- [sigma_x_seirv_simulation.m:116-131](file://chatgpt/sigma_x_seirv_simulation.m#L116-L131)
+- [sigmaX_model.m:188-210](file://deepseek/sigmaX_model.m#L188-L210)
+- [untitled2.m:88-108](file://doubao/untitled2.m#L88-L108)
 
 ### 疫苗延迟效应建模
 
-项目采用链式舱室法处理疫苗 14 天延迟效应：
+项目采用链式舱室法处理疫苗14天延迟效应，通过14个串联的等待舱室模拟抗体产生的生物学过程：
 
-- 从第 30 天开始，每天接种 10 万人
-- 接种者进入 U1-U14 共 14 个等待舱室
-- 14 天后 85% 的接种者进入 V（免疫态），15% 返回 S（易感态）
-- 精确模拟了抗体产生的生物学延迟过程
+```mermaid
+graph TB
+subgraph "疫苗接种流程"
+P[易感者 S] --> V[每日接种 v(t)]
+V --> U1[U1 接种后第1天]
+U1 --> U2[U2 接种后第2天]
+U2 --> U3[U3 接种后第3天]
+U3 --> U4[U4 接种后第4天]
+U4 --> U5[U5 接种后第5天]
+U5 --> U6[U6 接种后第6天]
+U6 --> U7[U7 接种后第7天]
+U7 --> U8[U8 接种后第8天]
+U8 --> U9[U9 接种后第9天]
+U9 --> U10[U10 接种后第10天]
+U10 --> U11[U11 接种后第11天]
+U11 --> U12[U12 接种后第12天]
+U12 --> U13[U13 接种后第13天]
+U13 --> U14[U14 接种后第14天]
+U14 --> V[免疫者 V<br/>85%保护率]
+U14 --> S[返回易感者 S<br/>15%未保护]
+end
+subgraph "延迟机制"
+L[14天固定延迟]
+L -.-> U1
+L -.-> U14
+end
+```
+
+**图表来源**
+- [sigmaX_model.m:226-240](file://deepseek/sigmaX_model.m#L226-L240)
+- [untitled2.m:132-139](file://doubao/untitled2.m#L132-L139)
 
 ### 免疫衰减机制
 
-项目实现了复杂的免疫衰减模型：
+项目实现了复杂的免疫衰减模型，模拟长期免疫的自然消退过程：
 
-- 康复者（R）和疫苗免疫者（V）在 150 天后有 10% 概率转为易感态（S）
-- 衰减速率：ω = 0.1/150 ≈ 0.00067/天
-- 模拟了长期免疫的自然消退过程
+```mermaid
+flowchart TD
+subgraph "免疫衰减过程"
+R[康复者 R] --> W[免疫衰减 ω]
+V[疫苗免疫者 V] --> W
+W --> S[R/V → S<br/>返回易感状态]
+W --> S2[V → S<br/>返回易感状态]
+subgraph "衰减速率"
+T[150天衰减10%]
+T --> RATE[ω = 0.1/150]
+end
+end
+subgraph "衰减影响"
+F[传播力下降]
+F --> I[感染率降低]
+I --> P[疫情曲线平滑]
+end
+W --> F
+```
+
+**图表来源**
+- [sigmaX_model.m:229-231](file://deepseek/sigmaX_model.m#L229-L231)
+- [a.m:23-24](file://gemini/a.m#L23-L24)
+
+**章节来源**
+- [sigmaX_model.m:102-127](file://deepseek/sigmaX_model.m#L102-L127)
+- [sigma_x_seirv_simulation.m:95-153](file://chatgpt/sigma_x_seirv_simulation.m#L95-L153)
+- [untitled2.m:77-140](file://doubao/untitled2.m#L77-L140)
 
 ## 架构概览
 
-项目采用统一的 SEIRV 框架，但四个 AI 助手版本在具体实现上各有特色：
+项目采用统一的SEIRV框架，但四个AI助手版本在具体实现上各有特色：
 
-| 特性 | ChatGPT 版本 | DeepSeek 版本 | DouBao 版本 | Google Gemini 版本 |
-|------|-------------|--------------|-------------|-------------------|
-| 模型复杂度 | SEIRV + 时滞 + 迟滞控制 | 改进 SEIRV + 14 天延迟 | SEIRV + 14 舱室延迟 | SEIRV-Delay 模型 |
-| 干预机制 | 基础迟滞控制 | 完整迟滞状态机 | 三状态迟滞控制 | 动态β系数调节 |
-| 疫苗建模 | Vw-V 链式反应 | J 中间状态 | 14 舱室链式 | Sv 中间状态 |
-| 免疫衰减 | R-V 衰减 | R-V 衰减 | R-V 衰减 | R/V → S 衰减 |
-| 输出特性 | 基础曲线图 | 多维度图表 | 对比仿真 | 双情景对比 |
+```mermaid
+graph TB
+subgraph "统一SEIRV框架"
+M[数学模型]
+S[仿真求解器]
+V[可视化输出]
+end
+subgraph "AI助手版本"
+C[ChatGPT版本]
+D[DeepSeek版本]
+B[DouBao版本]
+G[Google Gemini版本]
+end
+subgraph "实现差异"
+P1[参数化方式]
+P2[干预机制]
+P3[疫苗建模]
+P4[输出格式]
+end
+M --> C
+M --> D
+M --> B
+M --> G
+C --> P1
+D --> P2
+B --> P3
+G --> P4
+S --> V
+```
+
+**图表来源**
+- [sigma_x_seirv_simulation.m:49-49](file://chatgpt/sigma_x_seirv_simulation.m#L49-L49)
+- [sigmaX_model.m:63-66](file://deepseek/sigmaX_model.m#L63-L66)
+- [untitled2.m:24-24](file://doubao/untitled2.m#L24-L24)
+- [a.m:32-37](file://gemini/a.m#L32-L37)
+
+### 四个AI助手版本的实现差异
+
+| 特性 | ChatGPT版本 | DeepSeek版本 | DouBao版本 | Google Gemini版本 |
+|------|-------------|--------------|------------|-------------------|
+| **模型复杂度** | SEIRV + 时滞 + 迟滞控制 | 改进SEIRV + 14天延迟 | SEIRV + 14舱室延迟 | SEIRV-Delay模型 |
+| **干预机制** | 基础迟滞控制 | 完整迟滞状态机 | 三状态迟滞控制 | 动态β系数调节 |
+| **疫苗建模** | Vw-V链式反应 | J中间状态 | 14舱室链式 | Sv中间状态 |
+| **免疫衰减** | R-V衰减 | R-V衰减 | R-V衰减 | R/V → S衰减 |
+| **输出特性** | 基础曲线图 | 多维度图表 | 对比仿真 | 双情景对比 |
+
+**章节来源**
+- [sigma_x_seirv_simulation.m:1-154](file://chatgpt/sigma_x_seirv_simulation.m#L1-L154)
+- [sigmaX_model.m:1-244](file://deepseek/sigmaX_model.m#L1-L244)
+- [untitled2.m:1-140](file://doubao/untitled2.m#L1-L140)
+- [a.m:1-160](file://gemini/a.m#L1-L160)
 
 ## 详细组件分析
 
-### ChatGPT 版本分析
+### ChatGPT版本分析
 
-ChatGPT 版本代表了最简洁的 SEIRV 模型实现，专注于核心传播机制和动态干预：
+ChatGPT版本代表了最简洁的SEIRV模型实现，专注于核心传播机制和动态干预：
 
-**特点：**
-- 代码结构清晰，易于理解
-- 使用 persistent 变量实现迟滞控制
-- 基础的 ODE45 求解器配置
-- 标准的可视化输出
+```mermaid
+classDiagram
+class SigmaX_ODE {
++double S, E1, E2, I, R, Vw, V
++double beta_I, beta_E, sigma1, sigma2, gamma
++double omega, delta, vacc_rate, th_high, th_low
++double lambda, c, u
++persistent control_state
++SigmaX_ODE(t, y, p)
++dS_dt() double
++dE1_dt() double
++dE2_dt() double
++dI_dt() double
++dR_dt() double
++dVw_dt() double
++dV_dt() double
+}
+class DynamicControl {
++int control_state
++double th_high, th_low
++calculate_c() double
++update_state(P) void
+}
+class VaccineModel {
++double vacc_rate
++double t_vacc_start
++u(t) double
+}
+class ImmunityDecay {
++double omega
++dR_dt() double
++dV_dt() double
+}
+SigmaX_ODE --> DynamicControl : "uses"
+SigmaX_ODE --> VaccineModel : "uses"
+SigmaX_ODE --> ImmunityDecay : "uses"
+```
 
-**技术亮点：**
-- 简洁的参数定义方式
-- 高效的导数计算函数
-- 清晰的干预逻辑实现
+**图表来源**
+- [sigma_x_seirv_simulation.m:95-153](file://chatgpt/sigma_x_seirv_simulation.m#L95-L153)
 
-### DeepSeek 版本分析
+**章节来源**
+- [sigma_x_seirv_simulation.m:95-153](file://chatgpt/sigma_x_seirv_simulation.m#L95-L153)
+- [报告.md:70-111](file://chatgpt/报告.md#L70-L111)
 
-DeepSeek 版本提供了最完整的建模实现，包含了详细的参数说明和多维度可视化：
+### DeepSeek版本分析
 
-**特点：**
-- 详尽的参数注释和文档
-- 完整的数学推导过程
-- 多维度结果分析
-- 峰值检测和统计输出
+DeepSeek版本提供了最完整的建模实现，包含了详细的参数说明和多维度可视化：
 
-**技术亮点：**
-- 精细的 ODE 系统构建
-- 完整的迟滞状态机实现
-- 丰富的可视化图表
-- 详细的统计指标计算
+```mermaid
+sequenceDiagram
+participant User as 用户
+participant Model as DeepSeek模型
+participant Solver as ODE求解器
+participant Analyzer as 分析器
+User->>Model : 设置仿真参数
+Model->>Solver : 初始化ODE系统
+Solver->>Model : 计算状态导数
+Model->>Model : 更新干预状态
+Model->>Model : 计算疫苗延迟效应
+Model->>Model : 应用免疫衰减
+Solver->>Analyzer : 返回仿真结果
+Analyzer->>User : 显示多维度图表
+Analyzer->>User : 输出统计分析
+```
 
-### DouBao 版本分析
+**图表来源**
+- [sigmaX_model.m:63-66](file://deepseek/sigmaX_model.m#L63-L66)
+- [sigmaX_model.m:172-244](file://deepseek/sigmaX_model.m#L172-L244)
 
-DouBao 版本采用了创新的 20 维状态向量，通过链式舱室精确模拟疫苗延迟效应：
+**章节来源**
+- [sigmaX_model.m:172-244](file://deepseek/sigmaX_model.m#L172-L244)
+- [sigmaX_model_report.md:135-178](file://deepseek/sigmaX_model_report.md#L135-L178)
 
-**特点：**
-- 20 维状态向量的精细建模
-- 14 个 U 舱室的链式延迟模拟
-- 对比仿真功能（有/无干预）
-- 峰值对比分析
+### DouBao版本分析
 
-**技术亮点：**
-- 高精度的延迟效应建模
-- 创新的对比仿真设计
-- 清晰的代码组织结构
-- 实用的峰值分析功能
+DouBao版本采用了创新的20维状态向量，通过链式舱室精确模拟疫苗延迟效应：
 
-### Google Gemini 版本分析
+```mermaid
+flowchart TD
+subgraph "DouBao创新点"
+A[20维状态向量] --> B[14个U舱室]
+B --> C[精确延迟建模]
+A --> D[对比仿真]
+D --> E[有干预 vs 无干预]
+E --> F[峰值对比分析]
+end
+subgraph "链式舱室"
+U1[U1 易感者] --> U2[U2 第2天]
+U2 --> U3[U3 第3天]
+U3 --> U4[U4 第4天]
+U4 --> U5[U5 第5天]
+U5 --> U6[U6 第6天]
+U6 --> U7[U7 第7天]
+U7 --> U8[U8 第8天]
+U8 --> U9[U9 第9天]
+U9 --> U10[U10 第10天]
+U10 --> U11[U11 第11天]
+U11 --> U12[U12 第12天]
+U12 --> U13[U13 第13天]
+U13 --> U14[U14 第14天]
+end
+C --> U14
+```
 
-Google Gemini 版本采用了独特的 SEIRV-Delay 模型，通过 Sv 中间状态处理延迟效应：
+**图表来源**
+- [untitled2.m:18-20](file://doubao/untitled2.m#L18-L20)
+- [untitled2.m:118-140](file://doubao/untitled2.m#L118-L140)
 
-**特点：**
-- 创新的 Sv（抗体形成期）状态设计
-- 动态β系数调节机制
-- 双情景对比仿真
-- 简洁的代码实现
+**章节来源**
+- [untitled2.m:77-140](file://doubao/untitled2.m#L77-L140)
+- [报告.md:23-35](file://doubao/报告.md#L23-L35)
 
-**技术亮点：**
-- 简化的延迟效应处理
-- 灵活的参数调节机制
-- 高效的状态转移设计
-- 直观的可视化输出
+### Google Gemini版本分析
+
+Google Gemini版本采用了独特的SEIRV-Delay模型，通过Sv中间状态处理延迟效应：
+
+```mermaid
+graph LR
+subgraph "Gemini创新架构"
+S[易感者 S] --> Sv[抗体形成期 Sv]
+Sv --> V[疫苗免疫者 V]
+E1[潜伏前期] --> E2[潜伏后期]
+E2 --> I[感染者]
+I --> R[康复者]
+R --> S
+V --> S
+end
+subgraph "延迟机制"
+L[14天延迟]
+L --> Sv
+L --> V
+end
+subgraph "动态干预"
+P[活跃感染者比例]
+P --> C[接触系数 c(t)]
+C --> β[有效传播率 β(t)]
+end
+β --> E1
+β --> E2
+```
+
+**图表来源**
+- [a.m:84-134](file://gemini/a.m#L84-L134)
+- [a.m:121-133](file://gemini/a.m#L121-L133)
+
+**章节来源**
+- [a.m:84-160](file://gemini/a.m#L84-L160)
+- [结果.md:1-4](file://gemini/结果.md#L1-L4)
 
 ## 依赖关系分析
 
-### 软件依赖
-- **MATLAB R2016b 或更高版本**（推荐 R2020b+）
-- **ODE45 求解器**（MATLAB 内置）
-- **绘图工具箱**（MATLAB 内置）
+项目各组件之间的依赖关系体现了模块化设计的优势：
 
-### 外部依赖
-- 无外部工具箱依赖
-- 所有代码均使用 MATLAB 基础功能
+```mermaid
+graph TB
+subgraph "核心依赖"
+ODE[ODE求解器] --> MODEL[数学模型]
+MODEL --> CONTROL[动态干预]
+MODEL --> VACCINE[疫苗建模]
+MODEL --> IMMUNITY[免疫衰减]
+end
+subgraph "AI助手版本"
+C1[ChatGPT] --> ODE
+C2[DeepSeek] --> ODE
+C3[DouBao] --> ODE
+C4[Google] --> ODE
+end
+subgraph "辅助功能"
+VIS[可视化] --> ODE
+STATS[统计分析] --> ODE
+VALID[模型验证] --> ODE
+end
+ODE --> VIS
+ODE --> STATS
+ODE --> VALID
+MODEL --> CONTROL
+MODEL --> VACCINE
+MODEL --> IMMUNITY
+```
 
-### 文件依赖关系
+**图表来源**
+- [sigma_x_seirv_simulation.m:43-49](file://chatgpt/sigma_x_seirv_simulation.m#L43-L49)
+- [sigmaX_model.m:60-66](file://deepseek/sigmaX_model.m#L60-L66)
+- [untitled2.m:23-24](file://doubao/untitled2.m#L23-L24)
+- [a.m:29-32](file://gemini/a.m#L29-L32)
+
+### 参数传递机制
+
+各版本采用不同的参数传递策略：
+
+```mermaid
+flowchart LR
+subgraph "ChatGPT参数传递"
+P1[params结构体] --> F1[SigmaX_ODE函数]
+F1 --> C1[局部函数]
+end
+subgraph "DeepSeek参数传递"
+P2[多个参数] --> F2[ode_system函数]
+F2 --> C2[局部函数]
+end
+subgraph "DouBao参数传递"
+P3[多个参数] --> F3[sigmaX_ode函数]
+F3 --> C3[局部函数]
+end
+subgraph "Google参数传递"
+P4[params结构体] --> F4[ode_sys_intervention函数]
+F4 --> C4[局部函数]
+end
 ```
-主程序 (.m) → 建模报告 (.md) → 结果分析 (.md) → 可视化图表 (.png)
-```
+
+**图表来源**
+- [sigma_x_seirv_simulation.m:95-95](file://chatgpt/sigma_x_seirv_simulation.m#L95-L95)
+- [sigmaX_model.m:63-66](file://deepseek/sigmaX_model.m#L63-L66)
+- [untitled2.m:24-24](file://doubao/untitled2.m#L24-L24)
+- [a.m:32-32](file://gemini/a.m#L32-L32)
+
+**章节来源**
+- [sigma_x_seirv_simulation.m:43-49](file://chatgpt/sigma_x_seirv_simulation.m#L43-L49)
+- [sigmaX_model.m:60-66](file://deepseek/sigmaX_model.m#L60-L66)
+- [untitled2.m:23-24](file://doubao/untitled2.m#L23-L24)
+- [a.m:29-32](file://gemini/a.m#L29-L32)
 
 ## 性能考虑
 
-### 计算性能
-- **仿真时长**: 200 天，步长 0.1 天
-- **计算时间**: 通常在 1-3 秒内完成（取决于具体实现）
-- **内存占用**: < 10 MB（状态向量维度影响较小）
+### 计算效率优化
 
-### 数值稳定性
-- 使用 ode45 自适应步长保证数值精度
-- 状态变量非负约束处理
-- 人口守恒验证（dS+dE+dI+dR+dV ≈ 0）
+各版本在性能优化方面采用了不同的策略：
 
-### 优化建议
-1. 对于更长周期的仿真，可考虑使用 ode15s 刚性求解器
-2. 参数敏感性分析时可并行运行多个仿真
-3. 大规模蒙特卡洛模拟建议使用 parfor 并行循环
+| 优化策略 | ChatGPT版本 | DeepSeek版本 | DouBao版本 | Google版本 |
+|----------|-------------|--------------|------------|------------|
+| **求解器配置** | RelTol=1e-6, AbsTol=1e-8 | RelTol=1e-6 | RelTol=1e-6 | RelTol=1e-6 |
+| **非负约束** | 启用 | 未启用 | 未启用 | 未启用 |
+| **状态变量数量** | 7维 | 7维 | 20维 | 7维 |
+| **计算复杂度** | 低 | 中等 | 高 | 低 |
+| **内存使用** | 低 | 中等 | 高 | 低 |
+
+### 稳定性保证
+
+项目通过多种机制确保数值稳定性：
+
+1. **非负约束**：防止人口数量出现负值
+2. **相对容差控制**：平衡精度和计算速度
+3. **持久化变量**：避免阈值振荡
+4. **人口守恒验证**：检查模型正确性
+
+**章节来源**
+- [sigma_x_seirv_simulation.m:43-46](file://chatgpt/sigma_x_seirv_simulation.m#L43-L46)
+- [sigmaX_model.m:160-169](file://deepseek/sigmaX_model.m#L160-L169)
+- [untitled2.m:118-118](file://doubao/untitled2.m#L118-L118)
 
 ## 故障排除指南
 
 ### 常见问题及解决方案
 
-#### 1. ODE 求解器报错
-**问题**: "ODE45 无法收敛"或"步长过小"
-**解决方案**:
-- 检查初始值是否合理（应为正数）
-- 验证参数值是否在合理范围内
-- 尝试减小最大步长限制
-
-#### 2. 出现负值
-**问题**: 状态变量出现负值
-**解决方案**:
-- 在导数函数中添加 max(0, value) 约束
-- 使用 odeset 设置 'NonNegative' 选项
-- 检查参数是否导致过度消耗
-
-#### 3. 图形显示异常
-**问题**: 图形乱码或中文显示不正常
-**解决方案**:
-- 设置字体：`set(gca, 'FontName', 'SimHei')`
-- 使用英文标签替代中文
-- 检查 MATLAB 区域设置
-
-#### 4. 内存不足
-**问题**: 运行大型仿真时内存溢出
-**解决方案**:
-- 减少输出时间点数量
-- 使用稀疏矩阵存储
-- 分批次运行仿真
+| 问题类型 | 症状表现 | 可能原因 | 解决方案 |
+|----------|----------|----------|----------|
+| **函数定义错误** | "函数定义必须位于文件末尾" | 函数定义位置不当 | 将局部函数移动至文件末尾 |
+| **收敛问题** | ODE求解失败或发散 | 参数设置不合理 | 调整相对容差和绝对容差 |
+| **阈值振荡** | 干预状态频繁切换 | 缺少迟滞机制 | 添加persistent变量 |
+| **人口不守恒** | 人口总数随时间变化 | 模型方程错误 | 检查微分方程组 |
+| **内存不足** | 仿真运行缓慢或崩溃 | 状态变量过多 | 简化模型或优化参数 |
 
 ### 调试技巧
-1. 使用 `disp()` 或 `fprintf()` 输出关键变量
-2. 绘制中间状态变量检查模型行为
-3. 验证人口守恒条件
-4. 对比无干预情景验证干预逻辑
+
+1. **逐步注释法**：逐行注释代码定位问题
+2. **参数敏感性分析**：测试关键参数的影响
+3. **可视化诊断**：绘制中间变量曲线
+4. **边界条件测试**：验证极端情况下的行为
+
+**章节来源**
+- [sigmaX_model_report.md:237-253](file://deepseek/sigmaX_model_report.md#L237-L253)
 
 ## 结论
 
-本项目通过四个不同AI 助手的实现，展示了 MATLAB 在传染病建模中的强大能力。每个版本都有其独特的优势和适用场景：
+本项目成功展示了四种不同风格的SEIRV传染病传播动力学仿真实现，每种版本都有其独特的技术特点和适用场景：
 
-- **ChatGPT 版本**: 适合快速原型开发和教学演示
-- **DeepSeek 版本**: 适合深入研究和完整分析
-- **DouBao 版本**: 适合高精度延迟效应建模
-- **Google Gemini 版本**: 适合灵活的情景分析
+### 主要成就
 
-项目不仅为 Sigma-X 病毒传播研究提供了可靠的仿真工具，也为数学建模爱好者和研究人员提供了宝贵的学习资源。通过对比不同AI 助手的实现方式，读者可以深入了解同一问题的多种解决思路，提升自身的建模能力和编程技巧。
+1. **理论基础扎实**：基于严格的流行病学理论，准确反映Sigma-X病毒的传播特性
+2. **技术创新突出**：采用多种建模策略处理复杂的时滞和延迟效应
+3. **实用性很强**：为公共卫生决策提供了可靠的定量分析工具
+4. **教育价值高**：通过对比不同实现方案，展现了建模思维的多样性
 
+### 技术特色
+
+- **动态干预机制**：实现了智能的迟滞控制算法
+- **疫苗建模创新**：通过链式舱室精确模拟14天延迟效应
+- **免疫衰减建模**：考虑了长期免疫的自然消退过程
+- **多版本对比**：提供了不同复杂度和精度的实现方案
+
+### 应用前景
+
+该项目为传染病防控研究提供了重要的技术支撑，可以进一步扩展应用到其他传染病的建模分析中，为制定科学的公共卫生政策提供有力的理论依据。
 ---
 
 **项目维护**: 本项目的 wiki 文档和代码示例持续更新中，欢迎贡献和改进。
